@@ -41,6 +41,7 @@ module.exports = class extends Generator {
 
     return this.prompt(config.prompts).then(answers => {
       const features = answers.features;
+      const transpiler = answers.transpiler;
       const hasFeature = feat => features && features.includes(feat);
 
       // manually deal with the response, get back and store the results.
@@ -50,6 +51,9 @@ module.exports = class extends Generator {
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeAnalytics = hasFeature('includeAnalytics');
       this.includeJQuery = answers.includeJQuery;
+      this.includeBabel = transpiler === config.prompts[1].choices[0];
+      this.includeGoogleClosureCompiler =
+        transpiler === config.prompts[1].choices[1];
     });
   }
 
@@ -64,7 +68,9 @@ module.exports = class extends Generator {
       testFramework: this.options['test-framework'],
       includeJQuery: this.includeJQuery,
       includeModernizr: this.includeModernizr,
-      includeAnalytics: this.includeAnalytics
+      includeAnalytics: this.includeAnalytics,
+      includeBabel: this.includeBabel,
+      includeGoogleClosureCompiler: this.includeGoogleClosureCompiler
     };
 
     const copy = (input, output) => {

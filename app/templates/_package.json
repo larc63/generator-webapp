@@ -15,19 +15,26 @@
     <%_ } -%>
   },
   "devDependencies": {
+    <%_ if (includeBabel) { -%>
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    <%_ } -%>
     "autoprefixer": "^9.5.1",
     "browser-sync": "^2.26.5",
     "cross-env": "^5.2.0",
     "cssnano": "^4.1.10",
     "del": "^4.1.1",
     "gulp": "^4.0.2",
+    <%_ if (includeBabel) { -%>
     "gulp-babel": "^8.0.0",
+    <%_ } -%>
     "gulp-cli": "^2.2.0",
     "gulp-eslint": "^5.0.0",
     <%_ if (includeSass) { -%>
     "gulp-filter": "^6.0.0",
+    <%_ } -%>
+    <%_ if (includeGoogleClosureCompiler) { -%>
+    "google-closure-compiler": "^20191111.0.0",
     <%_ } -%>
     "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^2.0.2",

@@ -51,7 +51,20 @@ function scripts() {
     sourcemaps: !isProd,
   })
     .pipe($.plumber())
+    <%_ if (includeBabel) { -%>
     .pipe($.babel())
+    <%_ } if (includeGoogleClosureCompiler) { -%>
+    .pipe(closureCompiler({
+      compilation_level: 'SIMPLE',
+      warning_level: 'VERBOSE',
+      language_in: 'ECMASCRIPT6_STRICT',
+      language_out: 'ECMASCRIPT5_STRICT',
+      output_wrapper: '(function(){\n%output%\n}).call(this)',
+      js_output_file: 'output.min.js'
+    }, {
+      platform: ['native', 'java', 'javascript']
+    }))
+    <%_ } -%>
     .pipe(dest('.tmp/scripts', {
       sourcemaps: !isProd ? '.' : false,
     }))
