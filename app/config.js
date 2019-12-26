@@ -47,6 +47,13 @@ module.exports = {
       ]
     },
     {
+      type: 'list',
+      name: 'transpiler',
+      message: 'Which transpiler would you like to include?',
+      choices: ['Babel', 'Google Closure Compiler'],
+      default: 1
+    },
+    {
       type: 'confirm',
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
